@@ -19,10 +19,10 @@ public class LoadMovingViolations {
 	/**
 	 * Carga los datos del semestre indicado indicado
 	 * @param n Numero de semestre del anio (entre 1 y 2)
-	 * @param paraCarga Arreglo Dinamico con las tablas de simbolos donde se cargaran los archivos por ObjectID
+	 * @param tablas Arreglo Dinamico con las tablas de simbolos donde se cargaran los archivos por ObjectID
 	 * @return Cola con el numero de datos cargados por mes del semestre
 	 */
-	public static IArregloDinamico<Integer> loadMovingViolations(int n, ITablaSimOrd<Integer, VOMovingViolation>[] paraCarga)
+	public static IArregloDinamico<Integer> loadMovingViolations(int n, ITablaSimOrd<Integer, VOMovingViolation>[] tablas)
 	{
 		IArregloDinamico<Integer> numeroDeCargas = new ArregloDinamico<>();
 		if(n == 1)
@@ -33,7 +33,7 @@ public class LoadMovingViolations {
 					    	     "Moving_Violations_Issued_in_April_2018.json",
 					    	     "Moving_Violations_Issued_in_May_2018.json",
 					    	     "Moving_Violations_Issued_in_June_2018.json"
-					    	     }, paraCarga);
+					    	     }, tablas);
 		}
 		else if(n == 2)
 		{
@@ -43,7 +43,7 @@ public class LoadMovingViolations {
 								 "Moving_Violations_Issued_in_October_2018.json",
 								 "Moving_Violations_Issued_in_November_2018.json",
 								 "Moving_Violations_Issued_in_December_2018.json"
-								 }, paraCarga);
+								 }, tablas);
 		}
 		else
 		{
@@ -119,10 +119,10 @@ public class LoadMovingViolations {
 	 * Metodo ayudante
 	 * Carga la informacion sobre infracciones de los archivos a una pila y una cola ordenadas por fecha.
 	 * Dado un arreglo con los nombres de los archivos a cargar
-	 * @param paraCarga Arreglo Dinamico con las tablas de simbolos donde se cargaran los archivos por ObjectID
+	 * @param tablas Arreglo Dinamico con las tablas de simbolos donde se cargaran los archivos por ObjectID
 	 * @returns ArregloDinamico con el numero de datos cargados por mes del cuatrimestre
 	 */
-	private static IArregloDinamico<Integer> loadMovingViolations(String[] movingViolationsFilePaths, ITablaSimOrd<Integer, VOMovingViolation>[] paraCarga){
+	private static IArregloDinamico<Integer> loadMovingViolations(String[] movingViolationsFilePaths, ITablaSimOrd<Integer, VOMovingViolation>[] tablas){
 		JReader reader = null;
 		Gson gson = new Gson();
 		VOMovingViolation infraccionAct;
@@ -141,9 +141,9 @@ public class LoadMovingViolations {
 					// Crear infraccion dado el json actual
 					infraccionAct = gson.fromJson(json, VOMovingViolation.class);
 					
-					if (paraCarga[0].get(infraccionAct.getObjectId()) != null) throw new Exception("El ObjectID deberia ser unico!!");
+					if (tablas[0].get(infraccionAct.getObjectId()) != null) throw new Exception("El ObjectID deberia ser unico!!");
 					
-					for (ITablaSimOrd<Integer, VOMovingViolation> tabla : paraCarga) {
+					for (ITablaSimOrd<Integer, VOMovingViolation> tabla : tablas) {
 						tabla.put(infraccionAct.getObjectId(), infraccionAct);
 					}
 					

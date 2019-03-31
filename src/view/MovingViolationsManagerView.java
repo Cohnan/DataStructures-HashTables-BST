@@ -40,16 +40,9 @@ public class MovingViolationsManagerView
 	 *Imprime el requerimiento 1 - TODO 
 	 * @param TODO
 	 */
-	public void printMovingViolationsReq1(IArregloDinamico<VOMovingViolation> resultados1) {
-		System.out.println("Las infracciones que ocurrieron en esa direccion y que terminaron en accidente son:");
+	public void printMovingViolationsReq1(Object requerimiento1Met) {
+		// TODO Auto-generated method stub
 		
-		if (resultados1.darTamano() == 0) System.out.println("No ocurrieron infracciones con accidente en esa direccion.");
-		
-		for (VOMovingViolation infraccion : resultados1) {
-			System.out.println("ObjectID: " + infraccion.getObjectId() + 
-					"\tTicket Date: " + infraccion.getTicketIssueDate());
-		}
-		System.out.println();
 	}
 
 	public void printMessage(String mensaje) {

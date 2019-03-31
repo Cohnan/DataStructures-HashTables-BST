@@ -49,47 +49,17 @@ public class Controller {
 	/*
 	 * Metodos para requerimientos
 	 */
-	private IArregloDinamico<Integer> loadMovingViolations(int n, ITablaHash<Integer, IArregloDinamico<VOMovingViolation>>[] tablas) {
+	private IArregloDinamico<Integer> loadMovingViolations(int n, ITablaSimOrd<Integer, VOMovingViolation>[] tablas) {
 		return LoadMovingViolations.loadMovingViolations(n, tablas);
 	}
 	
-	/**
-	 * Mostrar infracciones que terminaron en accidente dada una dirección (usando LinearProbingHT)
-	 * @param addressId
-	 * @return ArregloDinamico con las infracciones deseadas, ordenadas cronologicamente
-	 */
-	public IArregloDinamico<VOMovingViolation> requerimiento1LinProb(int addressId) {
-		return requerimiento1Auxiliar(addressId, thLinProb);
+	private Object requerimiento1Met(int n) {
+		return null;
 	}
 	
-	/**
-	 * Mostrar infracciones que terminaron en accidente dada una dirección (usando SeparateChainingHT)
-	 * @param addressId
-	 * @return ArregloDinamico con las infracciones deseadas, ordenadas cronologicamente
+	/*
+	 * Ejecucion
 	 */
-	public IArregloDinamico<VOMovingViolation> requerimiento1SepChain(int addressId) {
-		return requerimiento1Auxiliar(addressId, thSepChain);
-	}
-	
-	/**
-	 * Metodo auxiliar para mostrar infracciones que terminaron en accidente dada una dirección
-	 * usando una de las tablas de hash existentes
-	 * @param addressId
-	 * @param thAUsar tabla de hash que se usará para extraer la información
-	 * @return ArregloDinamico con las infracciones deseadas, ordenadas cronologicamente
-	 */
-	public IArregloDinamico<VOMovingViolation> requerimiento1Auxiliar(int addressId, ITablaHash<Integer, IArregloDinamico<VOMovingViolation>> thAUsar) {
-		IArregloDinamico<VOMovingViolation> general = thAUsar.get(addressId);
-		IArregloDinamico<VOMovingViolation> respuesta = new ArregloDinamico<VOMovingViolation>();
-		
-		for (VOMovingViolation infraccion : general) {
-			if (infraccion.getAccidentIndicator()) respuesta.agregar(infraccion);
-		}
-		
-		Sort.ordenarShellSort(respuesta, new VOMovingViolation.TicketIssueOrder());
-		return respuesta;
-	}
-	
 	public void run() {
 		int nDatos = 0; // Para saber el numero total de datos cargados
 		int nMuestra = 0; // En caso de generarse una muestra, variable donde se guarda el tamanio dado por el cliente
@@ -108,23 +78,18 @@ public class Controller {
 			{
 			case 0:
 				// Cargar infracciones
-				thLinProb = new LinProbTH<Integer, IArregloDinamico<VOMovingViolation>>(600000); 
-				thSepChain = new SepChainTH<Integer, IArregloDinamico<VOMovingViolation>>(600000);
+				thLinProb = new BlancoRojoBST<Integer, VOMovingViolation>(); 
 				view.printMovingViolationsLoadInfo(this.loadMovingViolations(1, 
-						new ITablaHash[] {thLinProb, thSepChain}));
+						new ITablaSimOrd[] {thLinProb}));
 				semestreCargado = 1;
 				break;
 
 			case 1:
-				// Requerimiento 1a
-				view.printMessage("Ingrese un AddressID: ");
-				view.printMovingViolationsReq1(requerimiento1LinProb(sc.nextInt()));
+				// Requerimiento 1
+				view.printMessage("Requerimiento 1: ");
+				view.printMovingViolationsReq1(requerimiento1Met(sc.nextInt()));
 				break;
-			case 2:
-				// Requerimiento 1b
-				view.printMessage("Ingrese un AddressID: ");
-				view.printMovingViolationsReq1(requerimiento1SepChain(sc.nextInt()));
-				break;
+
 			case 10:	
 				fin=true;
 				sc.close();
@@ -132,8 +97,7 @@ public class Controller {
 			}
 		}
 	}
-	
-	
+
 	/**
 	 * Metodo para buscar strings en un array de strings, usado para deducir la posicion
 	 * de las columnas esperadas en cada archivo.
