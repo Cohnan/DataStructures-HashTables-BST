@@ -35,9 +35,7 @@ public class Controller {
 	
 	private static int semestreCargado;
 	
-	private static LinProbTH<Integer, IArregloDinamico<VOMovingViolation>> thLinProb;
-	
-	private static SepChainTH<Integer, IArregloDinamico<VOMovingViolation>> thSepChain;
+	private static ITablaSimOrd<Integer, VOMovingViolation> thLinProb;
 	
 	/*
 	 * Constructor
@@ -46,7 +44,6 @@ public class Controller {
 		view = new MovingViolationsManagerView();
 
 		thLinProb = null;
-		thSepChain = null;
 	}
 	
 	/*

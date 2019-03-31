@@ -9,17 +9,20 @@ import java.util.Iterator;
 import com.google.gson.Gson;
 
 import model.data_structures.ArregloDinamico;
+import model.data_structures.BlancoRojoBST;
 import model.data_structures.IArregloDinamico;
 import model.data_structures.ITablaHash;
+import model.data_structures.ITablaSimOrd;
 import model.vo.VOMovingViolation;
 
 public class LoadMovingViolations {
 	/**
 	 * Carga los datos del semestre indicado indicado
 	 * @param n Numero de semestre del anio (entre 1 y 2)
+	 * @param paraCarga Arreglo Dinamico con las tablas de simbolos donde se cargaran los archivos por ObjectID
 	 * @return Cola con el numero de datos cargados por mes del semestre
 	 */
-	public static IArregloDinamico<Integer> loadMovingViolations(int n, ITablaHash<Integer, IArregloDinamico<VOMovingViolation>>[] paraCarga)
+	public static IArregloDinamico<Integer> loadMovingViolations(int n, ITablaSimOrd<Integer, VOMovingViolation>[] paraCarga)
 	{
 		IArregloDinamico<Integer> numeroDeCargas = new ArregloDinamico<>();
 		if(n == 1)
@@ -116,13 +119,14 @@ public class LoadMovingViolations {
 	 * Metodo ayudante
 	 * Carga la informacion sobre infracciones de los archivos a una pila y una cola ordenadas por fecha.
 	 * Dado un arreglo con los nombres de los archivos a cargar
+	 * @param paraCarga Arreglo Dinamico con las tablas de simbolos donde se cargaran los archivos por ObjectID
 	 * @returns ArregloDinamico con el numero de datos cargados por mes del cuatrimestre
 	 */
-	private static IArregloDinamico<Integer> loadMovingViolations(String[] movingViolationsFilePaths, ITablaHash<Integer, IArregloDinamico<VOMovingViolation>>[] paraCarga){
+	private static IArregloDinamico<Integer> loadMovingViolations(String[] movingViolationsFilePaths, ITablaSimOrd<Integer, VOMovingViolation>[] paraCarga){
 		JReader reader = null;
 		Gson gson = new Gson();
 		VOMovingViolation infraccionAct;
-		IArregloDinamico<VOMovingViolation> valorAct;
+		//VOMovingViolation valorAct;
 		
 		IArregloDinamico<Integer> numeroDeCargas = new ArregloDinamico<>();
 		
@@ -137,15 +141,10 @@ public class LoadMovingViolations {
 					// Crear infraccion dado el json actual
 					infraccionAct = gson.fromJson(json, VOMovingViolation.class);
 					
-					// Agregar esta infraccion a las hash tables, asegurandose de no reescribir
-					valorAct = paraCarga[0].get(infraccionAct.getAddressID()); // El mismo para ambas tablas 
-					if(valorAct == null) {
-						valorAct = new ArregloDinamico<VOMovingViolation>();
-					}
-					valorAct.agregar(infraccionAct);
+					if (paraCarga[0].get(infraccionAct.getObjectId()) != null) throw new Exception("El ObjectID deberia ser unico!!");
 					
-					for (ITablaHash<Integer, IArregloDinamico<VOMovingViolation>> tabla : paraCarga) {
-						tabla.put(infraccionAct.getAddressID(), valorAct);
+					for (ITablaSimOrd<Integer, VOMovingViolation> tabla : paraCarga) {
+						tabla.put(infraccionAct.getObjectId(), infraccionAct);
 					}
 					
 					contadorInf += 1;
