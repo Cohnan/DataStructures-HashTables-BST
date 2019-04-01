@@ -25,18 +25,18 @@ import view.MovingViolationsManagerView;
 
 @SuppressWarnings("unused")
 public class Controller {
-	
+
 	/*
 	 * Atributos
 	 */
 	public static final String[] movingViolationsFilePaths = new String[] {"data/Moving_Violations_Issued_in_January_2018.json"};
 
 	private static MovingViolationsManagerView view;
-	
+
 	private static int semestreCargado;
-	
+
 	private static ITablaSimOrd<Integer, VOMovingViolation> thLinProb;
-	
+
 	/*
 	 * Constructor
 	 */
@@ -45,18 +45,20 @@ public class Controller {
 
 		thLinProb = null;
 	}
-	
+
 	/*
 	 * Metodos para requerimientos
 	 */
 	private IArregloDinamico<Integer> loadMovingViolations(int n, ITablaSimOrd<Integer, VOMovingViolation>[] tablas) {
 		return LoadMovingViolations.loadMovingViolations(n, tablas);
 	}
-	
-	private Object requerimiento2Met(int n) {
-		return null;
+
+	private Iterable<VOMovingViolation> requerimiento2Met(int min, int max) {
+
+		return thLinProb.valuesInRange(min, max);
+
 	}
-	
+
 	/*
 	 * Ejecucion
 	 */
@@ -73,7 +75,7 @@ public class Controller {
 			view.printMenu();
 
 			int option = sc.nextInt();
-			
+
 			switch(option)
 			{
 			case 0:
@@ -90,7 +92,16 @@ public class Controller {
 				view.printMovingViolationsReq1(aux);
 				break;
 
-			case 10:	
+			case 2:
+				//Requerimiento 2
+				view.printMessage("Object ID menor: ");
+				int menor = sc.nextInt();
+				view.printMessage("Object ID mayor: ");
+				int mayor = sc.nextInt();
+				view.printMovingViolationsReq2(requerimiento2Met(menor, mayor));
+
+
+			case 3:	
 				fin=true;
 				sc.close();
 				break;
@@ -137,5 +148,5 @@ public class Controller {
 	{
 		return LocalDateTime.parse(fechaHora, DateTimeFormatter.ofPattern("dd/MM/yyyy'T'HH:mm:ss"));
 
-    }
+	}
 }

@@ -1,5 +1,7 @@
 package model.data_structures;
 
+import java.util.Iterator;
+
 public interface ITablaSimOrd<K extends Comparable<K>, V> extends Iterable<K> {
 	
 	boolean isEmpty();
@@ -27,4 +29,6 @@ public interface ITablaSimOrd<K extends Comparable<K>, V> extends Iterable<K> {
 	K select(int num);
 	
 	int rank(K key);
+	
+	Iterable<V> valuesInRange(K init, K end);
 }
