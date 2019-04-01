@@ -29,7 +29,7 @@ public class Controller {
 	/*
 	 * Atributos
 	 */
-	public static final String[] movingViolationsFilePaths = new String[] {"data/Moving_Violations_Issued_in_January_2018.json", "data/Moving_Violations_Issued_in_February_2018.json", "data/Moving_Violations_Issued_in_March_2018.json","data/Moving_Violations_Issued_in_April_2018.json"};
+	public static final String[] movingViolationsFilePaths = new String[] {"data/Moving_Violations_Issued_in_January_2018.json"};
 
 	private static MovingViolationsManagerView view;
 	
@@ -53,7 +53,7 @@ public class Controller {
 		return LoadMovingViolations.loadMovingViolations(n, tablas);
 	}
 	
-	private Object requerimiento1Met(int n) {
+	private Object requerimiento2Met(int n) {
 		return null;
 	}
 	
@@ -79,15 +79,15 @@ public class Controller {
 			case 0:
 				// Cargar infracciones
 				thLinProb = new BlancoRojoBST<Integer, VOMovingViolation>(); 
-				view.printMovingViolationsLoadInfo(this.loadMovingViolations(1, 
-						new ITablaSimOrd[] {thLinProb}));
+				view.printMovingViolationsLoadInfo(this.loadMovingViolations(1, new ITablaSimOrd[] {thLinProb}));
 				semestreCargado = 1;
 				break;
 
 			case 1:
 				// Requerimiento 1
-				view.printMessage("Requerimiento 1: ");
-				view.printMovingViolationsReq1(requerimiento1Met(sc.nextInt()));
+				view.printMessage("ObjectID a buscar: ");
+				VOMovingViolation aux = thLinProb.get(sc.nextInt());
+				view.printMovingViolationsReq1(aux);
 				break;
 
 			case 10:	

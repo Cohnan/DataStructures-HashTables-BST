@@ -145,6 +145,14 @@ public class VOMovingViolation {
 		return Integer.parseInt(FINEAMT);
 	}
 	
+	public int getXCoord() {
+		return Integer.parseInt(XCOORD);
+	}
+	
+	public int getYCoord() {
+		return Integer.parseInt(YCOORD);
+	}
+	
 	
 	/*
 	 * Comparadores

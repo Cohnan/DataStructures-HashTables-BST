@@ -11,11 +11,11 @@ public class MovingViolationsManagerView
 	
 	public void printMenu() {
 		System.out.println("---------ISIS 1206 - Estructuras de datos----------");
-		System.out.println("---------------------Taller 6----------------------");
+		System.out.println("---------------------Taller 7----------------------");
 		System.out.println("0. Cargar datos de infracciones en movimiento");
-		System.out.println("1. Mostrar infracciones que terminaron en accidente dada una direcciÃ³n (usando LinearProbingHT)");
-		System.out.println("2. Mostrar infracciones que terminaron en accidente dada una direcciÃ³n (usando SeparateChainingHT)");
-		System.out.println("10. Cerrar programa");
+		System.out.println("1. Consultar información asociada a un valor ObjectID");
+		System.out.println("2. Consultar los ObjectID's en un rango dado");
+		System.out.println("3. Cerrar programa - Terminar Ejecución");
 		System.out.println("Digite el numero de opcion para ejecutar la tarea, luego presione enter: (Ej., 1):");
 		
 	}
@@ -40,9 +40,20 @@ public class MovingViolationsManagerView
 	 *Imprime el requerimiento 1 - TODO 
 	 * @param TODO
 	 */
-	public void printMovingViolationsReq1(Object requerimiento1Met) {
-		// TODO Auto-generated method stub
+	public void printMovingViolationsReq1(VOMovingViolation infraccion) {
 		
+		
+		if(infraccion == null){
+			System.out.println("Infracción - Object ID - inválida");
+		}else{
+		System.out.println("Información sobre la infracción con ID: " + infraccion.getObjectId());
+		System.out.println("Location" + infraccion.getLocation());
+		System.out.println("AddressID: "+infraccion.getAddressID());
+		System.out.println("StreetSegID: " + infraccion.getStreetsegID());
+		System.out.println("XCoord: " + infraccion.getXCoord());
+		System.out.println("YCoord: " + infraccion.getYCoord());
+		System.out.println("TicketIssueDate: "+ infraccion.getTicketIssueDate());
+		}
 	}
 
 	public void printMessage(String mensaje) {

@@ -9,6 +9,12 @@ public class BlancoRojoBST<K extends Comparable<K>, V> implements ITablaSimOrd<K
 	 * Guarda la raíz del árbol
 	 */
 	private NodoBST<K, V> root;
+
+	/**
+	 * Guarda el número de elementos
+	 */
+	private int numElementos;
+
 	/**
 	 * Constantes para saber el color del "link"
 	 */
@@ -29,7 +35,7 @@ public class BlancoRojoBST<K extends Comparable<K>, V> implements ITablaSimOrd<K
 	@Override
 	public Iterator<K> iterator() {
 		if (isEmpty()) return new Queue<K>().iterator();
-		return keys(min(), max()).iterator();
+		return keysInRange(min(), max()).iterator();
 	}
 
 
@@ -43,6 +49,7 @@ public class BlancoRojoBST<K extends Comparable<K>, V> implements ITablaSimOrd<K
 		if(key==null) return;
 		root = put(root,key,value);
 		root.asignarColor(BLACK);
+		numElementos ++;
 	}
 
 
@@ -77,6 +84,7 @@ public class BlancoRojoBST<K extends Comparable<K>, V> implements ITablaSimOrd<K
 
 		root = deleteMin(root);
 		if (!isEmpty()) root.asignarColor(BLACK);
+		numElementos--;
 	} 
 
 	/**
@@ -109,7 +117,7 @@ public class BlancoRojoBST<K extends Comparable<K>, V> implements ITablaSimOrd<K
 
 		root = delete(root, key);
 		if (!isEmpty()) root.asignarColor(BLACK); 
-
+		numElementos--;
 		return respuesta;
 	}
 
@@ -229,7 +237,6 @@ public class BlancoRojoBST<K extends Comparable<K>, V> implements ITablaSimOrd<K
 	 */
 	@Override
 	public boolean isEmpty() {
-
 		return darTamano() == 0;
 		// TODO Auto-generated method stub
 	}
@@ -269,7 +276,7 @@ public class BlancoRojoBST<K extends Comparable<K>, V> implements ITablaSimOrd<K
 		if(x == null) return null;
 		else return x.darKey();
 	}
-	
+
 	/**
 	 * Método auxiliar para encontrar la llave ceiling
 	 */
@@ -294,7 +301,7 @@ public class BlancoRojoBST<K extends Comparable<K>, V> implements ITablaSimOrd<K
 		NodoBST<K, V> x = select(root,num);
 		return x.darKey();
 	}
-	
+
 	/**
 	 * Método auxiliar para el select
 	 */
@@ -304,7 +311,7 @@ public class BlancoRojoBST<K extends Comparable<K>, V> implements ITablaSimOrd<K
 		else if(aux<num) return select(x.darDerecha(), num-aux-1);
 		else return x;
 	}
-	
+
 
 	/**
 	 * Retorna el número de llaves menor o iguales que la llave dada por parámetro
@@ -315,8 +322,8 @@ public class BlancoRojoBST<K extends Comparable<K>, V> implements ITablaSimOrd<K
 		return rank(key, root);
 		// TODO Auto-generated method stub
 	}
-	
-	
+
+
 	/**
 	 *  Método auxiliar para encontrar el rank
 	 */
@@ -327,34 +334,168 @@ public class BlancoRojoBST<K extends Comparable<K>, V> implements ITablaSimOrd<K
 		else if(comparacion>0) return 1 +size(x.darIzquierda()) + rank(key,x.darDerecha());
 		else return size(x.darIzquierda());
 	}
-	
-	
+
+
 	/**
 	 * Método para obtener el iterador
 	 */
-	public Iterable<K> keys(K min, K max){
-	if(min == null || max == null) return null;
-	Queue<K> cola = new Queue<>();
-	keys(root, cola, min, max);
-	return cola;
+	public Iterable<K> keysInRange(K min, K max){
+		if(min == null || max == null) return null;
+		Queue<K> cola = new Queue<>();
+		keys(root, cola, min, max);
+		return cola;
 	}
-	
-	
-	
+
+
+
 	/**
 	 * Método auxiliar iterador
 	 */
 	private void keys(NodoBST<K, V> x, Queue<K> cola, K min,K max){
-		 if (x == null) return; 
-		 int aux = min.compareTo(x.darKey());
-		 int aux2 = max.compareTo(x.darKey());
-		
-		 if(aux<0)keys(x.darIzquierda(),cola, min, max);
-		 if(aux<=0 && aux2 >= 0) cola.enqueue(x.darKey());
-		 if(aux2>0) keys(x.darDerecha(),cola,min,max);
+		if (x == null) return; 
+		int aux = min.compareTo(x.darKey());
+		int aux2 = max.compareTo(x.darKey());
+
+		if(aux<0)keys(x.darIzquierda(),cola, min, max);
+		if(aux<=0 && aux2 >= 0) cola.enqueue(x.darKey());
+		if(aux2>0) keys(x.darDerecha(),cola,min,max);
 	}
 
-	
+	/**
+	 * Método para obtener el iterador sobre los valores
+	 */
+	public Iterable<V> valuesInRange(K min, K max){
+		if(min == null || max == null) return null;
+		Queue<V> cola = new Queue<>();
+		valuesRange(root, cola, min, max);
+		return cola;
+	}
+
+
+
+	/**
+	 * Método auxiliar iterador
+	 */
+	private void valuesRange(NodoBST<K, V> x, Queue<V> cola, K min,K max){
+		if (x == null) return; 
+		int aux = min.compareTo(x.darKey());
+		int aux2 = max.compareTo(x.darKey());
+
+		if(aux<0)valuesRange(x.darIzquierda(),cola, min, max);
+		if(aux<=0 && aux2 >= 0) cola.enqueue(x.darValor());
+		if(aux2>0) valuesRange(x.darDerecha(),cola,min,max);
+	}
+
+
+
+	public int darNumeroParejas(){
+		return numElementos;
+	}
+
+
+	public int getHeight(K key){
+		if(!contains(key)) return -1;
+		else return getHeightAux(key);
+	}
+
+
+
+	private int getHeightAux(K key){
+		NodoBST<K, V> pNodo = root;
+		int contador = 0;
+		while (pNodo.darKey()!=key) {
+			contador ++;
+			int comparacion = key.compareTo(pNodo.darKey());
+			if(comparacion<0) pNodo = pNodo.darIzquierda();
+			else if(comparacion>0) pNodo =  pNodo.darDerecha();
+			else return contador;
+		}	
+
+		return contador;
+	}
+
+	//------------------------------------------------------------------------
+	// --------------------------MÉTODOS PARA VALIDAR CHECK-------------------
+	// -----------------------------------------------------------------------
+
+
+	/**
+	 * Verifica las condiciones básicas del árbol Rojo - Negro
+	 */
+	public boolean check(){
+
+		return(estaBalanceado() && validacionRedLinks() && verificacionOrdenamientoDerecha() && verificacionOrdenamientoIzquierda());
+	}
+
+
+
+
+	/**
+	 * Verifica si todos los caminos tienen el mismo número de enlaces negros
+	 */
+	private boolean estaBalanceado() { 
+		int numNegros = 0;  
+		NodoBST<K, V> x = root;
+		while (x != null) {
+			if (!isRed(x)) numNegros++;
+			x = x.darIzquierda();
+		}
+		return estaBalanceado(root, numNegros);
+	}
+	private boolean estaBalanceado(NodoBST<K, V> x, int numNegros) {
+		if (x == null) return numNegros == 0;
+		if (!isRed(x)) numNegros--;
+		return estaBalanceado(x.darIzquierda(), numNegros) && estaBalanceado(x.darDerecha(), numNegros);
+	} 
+
+
+	/**
+	 * Verifica las condiciones de los red links:
+	 * a) Un nodo no puede tener enlace rojo a su hijo derecho
+	 * b) No puede haber dos enlaces rojos consecutivos
+	 */
+	private boolean validacionRedLinks() { return validacionRedLinks(root); }
+	private boolean validacionRedLinks(NodoBST<K, V> x) {
+		if (x == null) return true;
+		if (isRed(x.darDerecha())) return false;
+		if (x != root && isRed(x) && isRed(x.darIzquierda()))
+			return false;
+		return validacionRedLinks(x.darIzquierda()) && validacionRedLinks(x.darDerecha());
+	} 
+
+	/**
+	 * Verifica que todas las llaves de la izquierda sean menores o iguales al padre
+	 */
+	private boolean verificacionOrdenamientoIzquierda(){
+		return verificacionOrdenamientoIzquierda(root);
+	}
+
+	private boolean verificacionOrdenamientoIzquierda(NodoBST<K, V> x){
+
+		if(x.darIzquierda() == null) return true;
+		else if(x.darKey().compareTo(x.darIzquierda().darKey())<=0){return false;}
+		else{
+			return(verificacionOrdenamientoIzquierda(x.darIzquierda()));
+		}
+	}
+
+	/**
+	 * Verifica que todas las llaver de la derecha sean menores o iguales
+	 */
+	private boolean verificacionOrdenamientoDerecha(){
+		return verificacionOrdenamientoDerecha(root);
+	}
+
+	private boolean verificacionOrdenamientoDerecha(NodoBST<K, V> x){
+
+		if(x.darDerecha() == null) return true;
+		else if(x.darKey().compareTo(x.darDerecha().darKey())>=0){return false;}
+		else{
+			return(verificacionOrdenamientoDerecha(x.darDerecha()));
+		}
+	}
+
+
 	//------------------------------------------------------------------------
 	// -------------------------------MÉTODOS AUXILIARES----------------------
 	// -----------------------------------------------------------------------
