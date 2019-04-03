@@ -145,12 +145,12 @@ public class VOMovingViolation {
 		return Integer.parseInt(FINEAMT);
 	}
 	
-	public int getXCoord() {
-		return Integer.parseInt(XCOORD);
+	public float getXCoord() {
+		return Float.parseFloat(XCOORD);
 	}
 	
-	public int getYCoord() {
-		return Integer.parseInt(YCOORD);
+	public float getYCoord() {
+		return Float.parseFloat(YCOORD);
 	}
 	
 	

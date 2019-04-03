@@ -15,9 +15,9 @@ public class MovingViolationsManagerView
 		System.out.println("---------ISIS 1206 - Estructuras de datos----------");
 		System.out.println("---------------------Taller 7----------------------");
 		System.out.println("0. Cargar datos de infracciones en movimiento");
-		System.out.println("1. Consultar información asociada a un valor ObjectID");
+		System.out.println("1. Consultar informaciï¿½n asociada a un valor ObjectID");
 		System.out.println("2. Consultar los ObjectID's en un rango dado");
-		System.out.println("3. Cerrar programa - Terminar Ejecución");
+		System.out.println("3. Cerrar programa - Terminar Ejecuciï¿½n");
 		System.out.println("Digite el numero de opcion para ejecutar la tarea, luego presione enter: (Ej., 1):");
 		
 	}
@@ -46,9 +46,9 @@ public class MovingViolationsManagerView
 		
 		
 		if(infraccion == null){
-			System.out.println("Infracción - Object ID - inválida");
+			System.out.println("Infracciï¿½n - Object ID - invï¿½lida");
 		}else{
-		System.out.println("Información sobre la infracción con ID: " + infraccion.getObjectId());
+		System.out.println("Informaciï¿½n sobre la infracciï¿½n con ID: " + infraccion.getObjectId());
 		System.out.println("Location" + infraccion.getLocation());
 		System.out.println("AddressID: "+infraccion.getAddressID());
 		System.out.println("StreetSegID: " + infraccion.getStreetsegID());
@@ -65,10 +65,10 @@ public class MovingViolationsManagerView
 
 	public void printMovingViolationsReq2(Iterable<VOMovingViolation> iterador) {
 		int contador = 0;
-		System.out.println("#"+"/t"+"ObjectID"+"/t"+"Location"+"/t"+"Address ID"+"/t"+"StreetSegID"+"/t"+"XCoord"+"/t"+"YCoord"+"/t"+"TicketIssueDate");
+		System.out.println("#"+"\t"+"ObjectID"+"\t"+"Location"+"\t"+"Address ID"+"\t"+"StreetSegID"+"\t"+"XCoord"+"\t"+"YCoord"+"\t"+"TicketIssueDate");
 		for(VOMovingViolation s: iterador ){
 		contador ++;
-		System.out.println(contador+"."+"/t" + s.getObjectId() +"/t" + s.getLocation()+"/t" +s.getAddressID()+"/t" +s.getStreetsegID()+"/t" +s.getXCoord()+ "/t" +s.getYCoord()+ "/t" +s.getTicketIssueDate());
+		System.out.println(contador+"."+"\t" + s.getObjectId() +"\t" + s.getLocation()+"\t" +s.getAddressID()+"\t" +s.getStreetsegID()+"\t" +s.getXCoord()+ "/t" +s.getYCoord()+ "\t" +s.getTicketIssueDate());
 		}
 	}
 	
