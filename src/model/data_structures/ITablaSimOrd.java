@@ -30,5 +30,13 @@ public interface ITablaSimOrd<K extends Comparable<K>, V> extends Iterable<K> {
 	
 	int rank(K key);
 	
+	int height();
+	
+	int getHeight(K key);
+	
+	int darNumeroParejas();
+	
+	Iterable<K> keysInRange(K init, K end); 
+	
 	Iterable<V> valuesInRange(K init, K end);
 }

@@ -6,12 +6,12 @@ public class BlancoRojoBST<K extends Comparable<K>, V> implements ITablaSimOrd<K
 
 
 	/**
-	 * Guarda la raíz del árbol
+	 * Guarda la raï¿½z del ï¿½rbol
 	 */
 	private NodoBST<K, V> root;
 
 	/**
-	 * Guarda el número de elementos
+	 * Guarda el nï¿½mero de elementos
 	 */
 	private int numElementos;
 
@@ -22,7 +22,7 @@ public class BlancoRojoBST<K extends Comparable<K>, V> implements ITablaSimOrd<K
 	private static final boolean BLACK = false;
 
 	/**
-	 * Constructor - Inicia una tabla Vacía
+	 * Constructor - Inicia una tabla Vacï¿½a
 	 */
 	public BlancoRojoBST() {
 		// TODO Auto-generated constructor stub
@@ -40,7 +40,7 @@ public class BlancoRojoBST<K extends Comparable<K>, V> implements ITablaSimOrd<K
 
 
 	/**
-	 * Método para agregar una llave y su valor
+	 * Mï¿½todo para agregar una llave y su valor
 	 * Si la llave ya existe se reemplaza
 	 */
 	@Override
@@ -54,7 +54,7 @@ public class BlancoRojoBST<K extends Comparable<K>, V> implements ITablaSimOrd<K
 
 
 	/**
-	 * Método auxiliar para encontrar donde se debe agregar la nueva llave
+	 * Mï¿½todo auxiliar para encontrar donde se debe agregar la nueva llave
 	 */
 	private NodoBST<K, V> put(NodoBST<K, V> pNodo, K key, V value){
 		if (pNodo == null) return new NodoBST<K,V>(key,value,RED,1);
@@ -72,8 +72,8 @@ public class BlancoRojoBST<K extends Comparable<K>, V> implements ITablaSimOrd<K
 	}
 
 	/**
-	 * Método que elimina la llave con el menor valor
-	 * Este método es necesario para realizar la eliminación general
+	 * Mï¿½todo que elimina la llave con el menor valor
+	 * Este mï¿½todo es necesario para realizar la eliminaciï¿½n general
 	 */
 	@Override
 	public void deleteMin() {
@@ -88,7 +88,7 @@ public class BlancoRojoBST<K extends Comparable<K>, V> implements ITablaSimOrd<K
 	} 
 
 	/**
-	 * Método auxiliar para eliminar el menor
+	 * Mï¿½todo auxiliar para eliminar el menor
 	 */
 	private NodoBST<K, V> deleteMin(NodoBST<K, V> pNodo) { 
 		if (pNodo.darIzquierda() == null)
@@ -102,7 +102,7 @@ public class BlancoRojoBST<K extends Comparable<K>, V> implements ITablaSimOrd<K
 	}
 
 	/**
-	 * Método para eliminar a partir de una llave dada
+	 * Mï¿½todo para eliminar a partir de una llave dada
 	 */
 	@Override
 	public V delete(K key) {
@@ -123,7 +123,7 @@ public class BlancoRojoBST<K extends Comparable<K>, V> implements ITablaSimOrd<K
 
 
 	/**
-	 * Método auxiliar para eliminar
+	 * Mï¿½todo auxiliar para eliminar
 	 */
 	private NodoBST<K, V> delete(NodoBST<K, V> pNodo, K key) { 
 		// assert get(h, key) != null;
@@ -153,7 +153,7 @@ public class BlancoRojoBST<K extends Comparable<K>, V> implements ITablaSimOrd<K
 	}
 
 	/**
-	 * Método para buscar
+	 * Mï¿½todo para buscar
 	 * Se obtiene un valor a partir de una llave
 	 */
 	@Override
@@ -165,7 +165,7 @@ public class BlancoRojoBST<K extends Comparable<K>, V> implements ITablaSimOrd<K
 	}
 
 	/**
-	 * Método auxiliar para buscar la llave en cuestión
+	 * Mï¿½todo auxiliar para buscar la llave en cuestiï¿½n
 	 */
 	private V get(NodoBST<K, V> pNodo, K key){
 		while (pNodo!=null) {
@@ -180,7 +180,7 @@ public class BlancoRojoBST<K extends Comparable<K>, V> implements ITablaSimOrd<K
 
 
 	/**
-	 * Método para determinar si la tabla contiene o no una llave
+	 * Mï¿½todo para determinar si la tabla contiene o no una llave
 	 */
 	@Override
 	public boolean contains(K key) {
@@ -199,7 +199,7 @@ public class BlancoRojoBST<K extends Comparable<K>, V> implements ITablaSimOrd<K
 	}
 
 	/**
-	 * Método auxiliar para buscar el mínimo
+	 * Mï¿½todo auxiliar para buscar el mï¿½nimo
 	 */
 	private NodoBST<K, V> min(NodoBST<K, V> x) { 
 		if (x.darIzquierda() == null) return x; 
@@ -216,7 +216,7 @@ public class BlancoRojoBST<K extends Comparable<K>, V> implements ITablaSimOrd<K
 
 
 	/**
-	 * Método auxiliar para buscar la máxima llave
+	 * Mï¿½todo auxiliar para buscar la mï¿½xima llave
 	 */
 	private NodoBST<K, V> max(NodoBST<K, V> x) { 
 		if (x.darDerecha() == null) return x; 
@@ -224,7 +224,7 @@ public class BlancoRojoBST<K extends Comparable<K>, V> implements ITablaSimOrd<K
 	}
 
 	/**
-	 * Retorna el tamaño del árbol
+	 * Retorna el tamaï¿½o del ï¿½rbol
 	 */
 	@Override
 	public int darTamano() {
@@ -233,7 +233,7 @@ public class BlancoRojoBST<K extends Comparable<K>, V> implements ITablaSimOrd<K
 	}
 
 	/**
-	 * Método para verificar si el árbol está vacío
+	 * Mï¿½todo para verificar si el ï¿½rbol estï¿½ vacï¿½o
 	 */
 	@Override
 	public boolean isEmpty() {
@@ -243,7 +243,7 @@ public class BlancoRojoBST<K extends Comparable<K>, V> implements ITablaSimOrd<K
 
 
 	/**
-	 * Retorna la llave más grande menor o igual a la llave dada por parámetro
+	 * Retorna la llave mï¿½s grande menor o igual a la llave dada por parï¿½metro
 	 */
 	@Override
 	public K floor(K key) {
@@ -254,7 +254,7 @@ public class BlancoRojoBST<K extends Comparable<K>, V> implements ITablaSimOrd<K
 		else return x.darKey();
 	}
 	/**
-	 * Método auxiliar para encontrar la llave floor
+	 * Mï¿½todo auxiliar para encontrar la llave floor
 	 */
 	private NodoBST<K, V> floor(NodoBST<K, V> x, K key){
 		if(x == null) return null;
@@ -267,7 +267,7 @@ public class BlancoRojoBST<K extends Comparable<K>, V> implements ITablaSimOrd<K
 	}
 
 	/**
-	 * Retorna la llave más pequeña mayor o igual a la llave dada por parámetro
+	 * Retorna la llave mï¿½s pequeï¿½a mayor o igual a la llave dada por parï¿½metro
 	 */
 	@Override
 	public K ceiling(K key) {
@@ -278,7 +278,7 @@ public class BlancoRojoBST<K extends Comparable<K>, V> implements ITablaSimOrd<K
 	}
 
 	/**
-	 * Método auxiliar para encontrar la llave ceiling
+	 * Mï¿½todo auxiliar para encontrar la llave ceiling
 	 */
 	private NodoBST<K, V> ceiling(NodoBST<K, V> x, K key){
 		if(x == null) return null;
@@ -303,7 +303,7 @@ public class BlancoRojoBST<K extends Comparable<K>, V> implements ITablaSimOrd<K
 	}
 
 	/**
-	 * Método auxiliar para el select
+	 * Mï¿½todo auxiliar para el select
 	 */
 	private NodoBST<K, V> select(NodoBST<K, V>x, int num){
 		int aux = size(x.darIzquierda());
@@ -314,7 +314,7 @@ public class BlancoRojoBST<K extends Comparable<K>, V> implements ITablaSimOrd<K
 
 
 	/**
-	 * Retorna el número de llaves menor o iguales que la llave dada por parámetro
+	 * Retorna el nï¿½mero de llaves menor o iguales que la llave dada por parï¿½metro
 	 */
 	@Override
 	public int rank(K key) {
@@ -325,7 +325,7 @@ public class BlancoRojoBST<K extends Comparable<K>, V> implements ITablaSimOrd<K
 
 
 	/**
-	 *  Método auxiliar para encontrar el rank
+	 *  Mï¿½todo auxiliar para encontrar el rank
 	 */
 	private int rank(K key, NodoBST<K, V> x){
 		if(x == null) return 0;
@@ -337,7 +337,7 @@ public class BlancoRojoBST<K extends Comparable<K>, V> implements ITablaSimOrd<K
 
 
 	/**
-	 * Método para obtener el iterador
+	 * Mï¿½todo para obtener el iterador
 	 */
 	public Iterable<K> keysInRange(K min, K max){
 		if(min == null || max == null) return null;
@@ -349,7 +349,7 @@ public class BlancoRojoBST<K extends Comparable<K>, V> implements ITablaSimOrd<K
 
 
 	/**
-	 * Método auxiliar iterador
+	 * Mï¿½todo auxiliar iterador
 	 */
 	private void keys(NodoBST<K, V> x, Queue<K> cola, K min,K max){
 		if (x == null) return; 
@@ -362,7 +362,7 @@ public class BlancoRojoBST<K extends Comparable<K>, V> implements ITablaSimOrd<K
 	}
 
 	/**
-	 * Método para obtener el iterador sobre los valores
+	 * Mï¿½todo para obtener el iterador sobre los valores
 	 */
 	public Iterable<V> valuesInRange(K min, K max){
 		if(min == null || max == null) return null;
@@ -374,7 +374,7 @@ public class BlancoRojoBST<K extends Comparable<K>, V> implements ITablaSimOrd<K
 
 
 	/**
-	 * Método auxiliar iterador
+	 * Mï¿½todo auxiliar iterador
 	 */
 	private void valuesRange(NodoBST<K, V> x, Queue<V> cola, K min,K max){
 		if (x == null) return; 
@@ -398,7 +398,16 @@ public class BlancoRojoBST<K extends Comparable<K>, V> implements ITablaSimOrd<K
 		else return getHeightAux(key);
 	}
 
-
+	public int height() {
+		int maxAltura = -1;
+		int alturaAct;
+		for (K key : this) {
+			alturaAct = getHeight(key);
+			maxAltura = maxAltura < alturaAct? alturaAct: maxAltura;  
+		}
+		
+		return maxAltura;
+	}
 
 	private int getHeightAux(K key){
 		NodoBST<K, V> pNodo = root;
@@ -415,12 +424,12 @@ public class BlancoRojoBST<K extends Comparable<K>, V> implements ITablaSimOrd<K
 	}
 
 	//------------------------------------------------------------------------
-	// --------------------------MÉTODOS PARA VALIDAR CHECK-------------------
+	// --------------------------Mï¿½TODOS PARA VALIDAR CHECK-------------------
 	// -----------------------------------------------------------------------
 
 
 	/**
-	 * Verifica las condiciones básicas del árbol Rojo - Negro
+	 * Verifica las condiciones bï¿½sicas del ï¿½rbol Rojo - Negro
 	 */
 	public boolean check(){
 
@@ -431,7 +440,7 @@ public class BlancoRojoBST<K extends Comparable<K>, V> implements ITablaSimOrd<K
 
 
 	/**
-	 * Verifica si todos los caminos tienen el mismo número de enlaces negros
+	 * Verifica si todos los caminos tienen el mismo nï¿½mero de enlaces negros
 	 */
 	private boolean estaBalanceado() { 
 		int numNegros = 0;  
@@ -497,12 +506,12 @@ public class BlancoRojoBST<K extends Comparable<K>, V> implements ITablaSimOrd<K
 
 
 	//------------------------------------------------------------------------
-	// -------------------------------MÉTODOS AUXILIARES----------------------
+	// -------------------------------Mï¿½TODOS AUXILIARES----------------------
 	// -----------------------------------------------------------------------
 
 
 	/**
-	 * Método auxiliar para rotar a la izquierda el árbol
+	 * Mï¿½todo auxiliar para rotar a la izquierda el ï¿½rbol
 	 */
 	private NodoBST<K, V> rotarIzquierda(NodoBST<K, V> pNodo) {
 		NodoBST<K, V> x = pNodo.darDerecha();
@@ -516,7 +525,7 @@ public class BlancoRojoBST<K extends Comparable<K>, V> implements ITablaSimOrd<K
 	}
 
 	/**
-	 * Método auxiliar para rotar a la derecha el árbol
+	 * Mï¿½todo auxiliar para rotar a la derecha el ï¿½rbol
 	 */
 	private NodoBST<K, V> rotarDerecha(NodoBST<K, V> pNodo) {
 		NodoBST<K, V> x = pNodo.darIzquierda();
@@ -530,7 +539,7 @@ public class BlancoRojoBST<K extends Comparable<K>, V> implements ITablaSimOrd<K
 	}
 
 	/**
-	 * Método para cambiar los colores de los links de 3 nodos
+	 * Mï¿½todo para cambiar los colores de los links de 3 nodos
 	 */
 	private void cambiarColores(NodoBST<K, V> pNodo) {
 		pNodo.asignarColor(!pNodo.darColor());
@@ -540,7 +549,7 @@ public class BlancoRojoBST<K extends Comparable<K>, V> implements ITablaSimOrd<K
 
 
 	/**
-	 * Método para determinar si el arco que llega a un nodo es rojo
+	 * Mï¿½todo para determinar si el arco que llega a un nodo es rojo
 	 */
 	private boolean isRed(NodoBST<K, V> pNodo){
 		if (pNodo == null) return false;
@@ -551,7 +560,7 @@ public class BlancoRojoBST<K extends Comparable<K>, V> implements ITablaSimOrd<K
 
 
 	/**
-	 * Restaura el árbol balanceado
+	 * Restaura el ï¿½rbol balanceado
 	 */
 	private NodoBST<K, V> balance(NodoBST<K, V> pNodo) {
 
@@ -592,7 +601,7 @@ public class BlancoRojoBST<K extends Comparable<K>, V> implements ITablaSimOrd<K
 
 
 	/**
-	 * Método para obtener la altura a partir de un nodo
+	 * Mï¿½todo para obtener la altura a partir de un nodo
 	 */
 	private int size(NodoBST<K, V> pNodo){
 		if(pNodo == null) return 0;

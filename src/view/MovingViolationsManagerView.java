@@ -65,10 +65,10 @@ public class MovingViolationsManagerView
 
 	public void printMovingViolationsReq2(Iterable<VOMovingViolation> iterador) {
 		int contador = 0;
-		System.out.println("#"+"\t"+"ObjectID"+"\t"+"Location"+"\t"+"Address ID"+"\t"+"StreetSegID"+"\t"+"XCoord"+"\t"+"YCoord"+"\t"+"TicketIssueDate");
+		System.out.println("#"+"\t"+"ObjectID"+"\t"+"Location"+"\t\t"+"Address ID"+"\t"+"StreetSegID"+"\t"+"XCoord"+"\t"+"YCoord"+"\t"+"TicketIssueDate");
 		for(VOMovingViolation s: iterador ){
 		contador ++;
-		System.out.println(contador+"."+"\t" + s.getObjectId() +"\t" + s.getLocation()+"\t" +s.getAddressID()+"\t" +s.getStreetsegID()+"\t" +s.getXCoord()+ "/t" +s.getYCoord()+ "\t" +s.getTicketIssueDate());
+		System.out.println(contador+"."+"\t" + s.getObjectId() +"\t" + s.getLocation()+"\t" +s.getAddressID()+"\t" +s.getStreetsegID()+"\t" +s.getXCoord()+ "\t" +s.getYCoord()+ "\t" +s.getTicketIssueDate());
 		}
 	}
 	

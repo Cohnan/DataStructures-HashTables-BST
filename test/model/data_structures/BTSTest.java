@@ -17,7 +17,7 @@ public class BTSTest {
 	/*
 	 * Escenarios
 	 */
-	// Arreglo con n elementos
+	// Arreglo con los elementos 0:0, 1:1, ..., n-1:n-1
 	private void setUpEscenario(int n, boolean aleatorio) {
 		tabla = new BlancoRojoBST<Integer, Integer>();
 		if (!aleatorio) {
@@ -422,5 +422,40 @@ public class BTSTest {
 			System.out.println("testCeiling() funciona para el escenario " + n + ", para todos los elementos.");			
 		}
 		System.out.println("testCeiling() funciona!");
+	}
+	
+	/**
+	 * Prueba el metodo getHeight()
+	 */
+	@Test
+	public void testGetHeight() {
+		setUpEscenario(22, false); // Escenario hecho a mano que se conoce con detalle
+		
+		int alturaObtenida;
+		int[] alturasEsperadas = new int[] {3, 2, 3, 1, 3, 2, 3, 0, 4, 3, 4, 2, 4, 3, 4, 1, 4, 3, 4, 2, 4, 3};
+		
+		for (int i = 0; i < 22; i++) {
+			alturaObtenida = tabla.getHeight(i);
+			assertTrue("Escenario: " + 22 + ". La altura esperada para " + i + " era: " + alturasEsperadas[i]
+					+ ", pero se obtuvo " + alturaObtenida, alturaObtenida == alturasEsperadas[i]);
+			System.out.println("Altura correcta para " + i);
+		}	
+		
+		// Elementos inexistentes
+		alturaObtenida = tabla.getHeight(-10);
+		assertTrue("Escenario: " + 22 + ". La altura esperada para " + -10 + " era: " + (-1)
+				+ ", pero se obtuvo " + alturaObtenida, alturaObtenida == -1);
+		System.out.println("Altura correcta para elementos inexistentes.");
+	}
+	
+	/**
+	 * Prueba el metodo height()
+	 */
+	@Test
+	public void testHeight() {
+		setUpEscenario(22, false); // Escenario hecho a mano que se conoce con detalle
+		int alturaObtenida = tabla.height();
+		assertTrue("Escenario: " + 22 + ". La altura esperada para el arbol era: " + 4
+				+ ", pero se obtuvo " + alturaObtenida, alturaObtenida == 4);
 	}
 }
