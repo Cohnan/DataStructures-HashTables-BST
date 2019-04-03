@@ -474,4 +474,43 @@ public class BTSTest {
 					+ ", pero se obtuvieron " + numeroParejas, numeroParejas == n);
 		}
 	}
+	
+	/**
+	 * Prueba el metodo keysInRange()
+	 */
+	@Test
+	public void testKeysInRange() {
+		int nTests = 15; // Numero de intervalos con los que se probara el metodo para cada escenario
+		int minKey;
+		int maxKey;
+		int temp;
+		IArregloDinamico<Integer> llavesEncontradas = new ArregloDinamico<>();
+		
+		for (int n = 0; n < numeroEscenarios; n++) {
+			setUpEscenario(n, true);
+			
+			// Probar varios rangos por cada escenario
+			for (int i = 0; i < nTests; i++) {
+				// Eleccion de los rangos
+				minKey = (int)(Math.random()*n);
+				maxKey = (int)(Math.random()*n);
+				
+				if (maxKey < minKey) {
+					temp = minKey;
+					minKey = maxKey;
+					maxKey = minKey;
+				}
+				
+				// Extraccion de llaves en rango en formato ordenable
+				for (Integer key : tabla.keysInRange(minKey, maxKey)) llavesEncontradas.agregar(key);
+				Sort.ordenarQuickSort(llavesEncontradas);
+				
+				// Revisar que todas las llaves en ese rango fueron encontradas
+				for (int i = minKey; i < maxKey; i++) {
+					assertTrue("",false); // TODO
+				}
+				
+			}
+		}
+	}
 }
