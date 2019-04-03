@@ -458,4 +458,20 @@ public class BTSTest {
 		assertTrue("Escenario: " + 22 + ". La altura esperada para el arbol era: " + 4
 				+ ", pero se obtuvo " + alturaObtenida, alturaObtenida == 4);
 	}
+	
+	/**
+	 * Prueba el metodo darNumeroParejas()
+	 */
+	@Test
+	public void testDarNumeroParejas() {
+		int numeroParejas;
+		
+		for (int n = 0; n < numeroEscenarios; n++) {
+			setUpEscenario(n, true);
+			
+			numeroParejas = tabla.darNumeroParejas();
+			assertTrue("Escenario: " + n + ". El numero de parejas esperado en el arbol era: " + n
+					+ ", pero se obtuvieron " + numeroParejas, numeroParejas == n);
+		}
+	}
 }
