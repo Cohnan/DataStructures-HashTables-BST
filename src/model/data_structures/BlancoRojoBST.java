@@ -388,16 +388,31 @@ public class BlancoRojoBST<K extends Comparable<K>, V> implements ITablaSimOrd<K
 
 
 
+
+
+	/**
+	 * retorna el número de elementos en el árbol 
+	 */
 	public int darNumeroParejas(){
 		return numElementos;
 	}
 
 
+
+
+	/**
+	 * Se obtiene la altura dado una llave
+	 */
 	public int getHeight(K key){
 		if(!contains(key)) return -1;
 		else return getHeightAux(key);
 	}
 
+
+
+	/**
+	 * Se obtiene la altura del árbol 
+	 */
 	public int height() {
 		int maxAltura = -1;
 		int alturaAct;
@@ -409,6 +424,10 @@ public class BlancoRojoBST<K extends Comparable<K>, V> implements ITablaSimOrd<K
 		return maxAltura;
 	}
 
+
+	/**
+	 * Método auxiliar para obtener la altura dado una llave
+	 */
 	private int getHeightAux(K key){
 		NodoBST<K, V> pNodo = root;
 		int contador = 0;
