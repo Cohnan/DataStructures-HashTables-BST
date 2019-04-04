@@ -23,7 +23,6 @@ import model.util.Sort;
 import model.vo.VOMovingViolation;
 import view.MovingViolationsManagerView;
 
-@SuppressWarnings("unused")
 public class Controller {
 
 	/*
@@ -35,7 +34,7 @@ public class Controller {
 
 	private static int semestreCargado;
 
-	private static ITablaSimOrd<Integer, VOMovingViolation> thLinProb;
+	private static ITablaSimOrd<Integer, VOMovingViolation> arbolBR;
 
 	/*
 	 * Constructor
@@ -43,19 +42,19 @@ public class Controller {
 	public Controller() {
 		view = new MovingViolationsManagerView();
 
-		thLinProb = null;
+		arbolBR = null;
 	}
 
 	/*
 	 * Metodos para requerimientos
 	 */
-	private IArregloDinamico<Integer> loadMovingViolations(int n, ITablaSimOrd<Integer, VOMovingViolation>[] tablas) {
+	private static IArregloDinamico<Integer> loadMovingViolations(int n, ITablaSimOrd<Integer, VOMovingViolation>[] tablas) {
 		return LoadMovingViolations.loadMovingViolations(n, tablas);
 	}
 
 	private Iterable<VOMovingViolation> requerimiento2Met(int min, int max) {
 
-		return thLinProb.valuesInRange(min, max);
+		return arbolBR.valuesInRange(min, max);
 
 	}
 
@@ -63,9 +62,6 @@ public class Controller {
 	 * Ejecucion
 	 */
 	public void run() {
-		int nDatos = 0; // Para saber el numero total de datos cargados
-		int nMuestra = 0; // En caso de generarse una muestra, variable donde se guarda el tamanio dado por el cliente
-		long[] tiempos;// Para calcular tiempos de agregacion y eliminacion de elementos
 
 		Scanner sc = new Scanner(System.in);
 		boolean fin = false;
@@ -80,15 +76,15 @@ public class Controller {
 			{
 			case 0:
 				// Cargar infracciones
-				thLinProb = new BlancoRojoBST<Integer, VOMovingViolation>(); 
-				view.printMovingViolationsLoadInfo(this.loadMovingViolations(1, new ITablaSimOrd[] {thLinProb}));
+				arbolBR = new BlancoRojoBST<Integer, VOMovingViolation>(); 
+				view.printMovingViolationsLoadInfo(this.loadMovingViolations(1, new ITablaSimOrd[] {arbolBR}));
 				semestreCargado = 1;
 				break;
 
 			case 1:
 				// Requerimiento 1
 				view.printMessage("ObjectID a buscar: ");
-				VOMovingViolation aux = thLinProb.get(sc.nextInt());
+				VOMovingViolation aux = arbolBR.get(sc.nextInt());
 				view.printMovingViolationsReq1(aux);
 				break;
 
@@ -107,23 +103,6 @@ public class Controller {
 				break;
 			}
 		}
-	}
-
-	/**
-	 * Metodo para buscar strings en un array de strings, usado para deducir la posicion
-	 * de las columnas esperadas en cada archivo.
-	 * @param array
-	 * @param string
-	 * @return
-	 */
-	private int buscarArray(String[] array, String string) {
-		int i = 0;
-
-		while (i < array.length) {
-			if (array[i].equalsIgnoreCase(string)) return i;
-			i += 1;
-		}
-		return -1;
 	}
 
 	/*
@@ -148,5 +127,27 @@ public class Controller {
 	{
 		return LocalDateTime.parse(fechaHora, DateTimeFormatter.ofPattern("dd/MM/yyyy'T'HH:mm:ss"));
 
+	}
+	
+	public static void main(String[] args) {
+		// Calculos para el analisis pedido en el Taller
+		arbolBR = new BlancoRojoBST<Integer, VOMovingViolation>(); 
+		loadMovingViolations(1, new ITablaSimOrd[] {arbolBR});
+		
+		// Total nodos
+		System.out.println("El numero total de nodos es: " + arbolBR.darTamano());
+		
+		// Altura del arbol
+		System.out.println("La altura del arbol es: " + arbolBR.height());
+		
+		// Altura promedio
+		float altProm = 0;
+		for (Integer key : arbolBR) {
+			altProm += arbolBR.getHeight(key);
+		}
+		
+		altProm /= arbolBR.darTamano();
+		System.out.println("La altura promedio del arbol es: " + altProm);
+		
 	}
 }
