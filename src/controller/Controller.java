@@ -28,7 +28,19 @@ public class Controller {
 	/*
 	 * Atributos
 	 */
-	public static final String[] movingViolationsFilePaths = new String[] {"data/Moving_Violations_Issued_in_January_2018.json"};
+	public static final String[] movingViolationsFilePaths = new String[] {"data/Moving_Violations_Issued_in_January_2018.json", 
+   	     "Moving_Violations_Issued_in_February_2018.json",
+   	     "Moving_Violations_Issued_in_March_2018.json",
+   	     "Moving_Violations_Issued_in_April_2018.json",
+   	     "Moving_Violations_Issued_in_May_2018.json",
+   	     "Moving_Violations_Issued_in_June_2018.json",
+   	     "Moving_Violations_Issued_in_July_2018.json",
+		 "Moving_Violations_Issued_in_August_2018.json",
+		 "Moving_Violations_Issued_in_September_2018.json", 
+		 "Moving_Violations_Issued_in_October_2018.json",
+		 "Moving_Violations_Issued_in_November_2018.json",
+		 "Moving_Violations_Issued_in_December_2018.json"
+   	     };
 
 	private static MovingViolationsManagerView view;
 

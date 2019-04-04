@@ -24,31 +24,17 @@ public class LoadMovingViolations {
 	 */
 	public static IArregloDinamico<Integer> loadMovingViolations(int n, ITablaSimOrd<Integer, VOMovingViolation>[] tablas)
 	{
+		String[] filePaths = new String[6];
 		IArregloDinamico<Integer> numeroDeCargas = new ArregloDinamico<>();
-		if(n == 1)
-		{
-			numeroDeCargas = loadMovingViolations(new String[] {"Moving_Violations_Issued_in_January_2018.json", 
-					    	     "Moving_Violations_Issued_in_February_2018.json",
-					    	     "Moving_Violations_Issued_in_March_2018.json",
-					    	     "Moving_Violations_Issued_in_April_2018.json",
-					    	     "Moving_Violations_Issued_in_May_2018.json",
-					    	     "Moving_Violations_Issued_in_June_2018.json"
-					    	     }, tablas);
-		}
-		else if(n == 2)
-		{
-			numeroDeCargas = loadMovingViolations(new String[] {"Moving_Violations_Issued_in_July_2018.json",
-								 "Moving_Violations_Issued_in_August_2018.json",
-								 "Moving_Violations_Issued_in_September_2018.json", 
-								 "Moving_Violations_Issued_in_October_2018.json",
-								 "Moving_Violations_Issued_in_November_2018.json",
-								 "Moving_Violations_Issued_in_December_2018.json"
-								 }, tablas);
-		}
-		else
+		if (n != 1 && n != 2)
 		{
 			throw new IllegalArgumentException("No existe ese semestre en un annio.");
 		}
+		
+		for (int i = 0; i < 6; i++) filePaths[i] = Controller.movingViolationsFilePaths[6*(n-1) + i];
+		
+		numeroDeCargas = loadMovingViolations(filePaths, tablas);
+		
 		return numeroDeCargas;
 	}
 	
