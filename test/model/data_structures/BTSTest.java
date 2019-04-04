@@ -486,11 +486,12 @@ public class BTSTest {
 		int temp;
 		IArregloDinamico<Integer> llavesEncontradas = new ArregloDinamico<>();
 		
-		for (int n = 0; n < numeroEscenarios; n++) {
+		for (int n = 1; n < numeroEscenarios; n++) {
 			setUpEscenario(n, true);
 			
 			// Probar varios rangos por cada escenario
 			for (int i = 0; i < nTests; i++) {
+				llavesEncontradas = new ArregloDinamico<>();
 				// Eleccion de los rangos
 				minKey = (int)(Math.random()*n);
 				maxKey = (int)(Math.random()*n);
@@ -498,18 +499,72 @@ public class BTSTest {
 				if (maxKey < minKey) {
 					temp = minKey;
 					minKey = maxKey;
-					maxKey = minKey;
+					maxKey = temp;
 				}
 				
 				// Extraccion de llaves en rango en formato ordenable
 				for (Integer key : tabla.keysInRange(minKey, maxKey)) llavesEncontradas.agregar(key);
 				Sort.ordenarQuickSort(llavesEncontradas);
 				
+							
 				// Revisar que todas las llaves en ese rango fueron encontradas
-				for (int i = minKey; i < maxKey; i++) {
-					assertTrue("",false); // TODO
+				for (int j = minKey; j <= maxKey; j++) {
+					assertTrue("Escenario: " + n + ". Se esperaba encontrar a la llave " + j + " en el rango de busqueda"
+							+ " cuando en cambio se encontro la llave " + llavesEncontradas.darObjeto(j - minKey)
+							, llavesEncontradas.darObjeto(j - minKey).equals(j));
+					System.out.println("Se hallo la llave correcto en el escenacio " + n + " para minKey = " + minKey + ", maxKey =  " + maxKey + " y la llave " + j);
 				}
 				
+				// Asegurarse de que no hay llaves adicionales encontradas en ese rango
+				assertTrue("Escenario: " + n + ". No se esperaban llaves adicionales en el rango dado, pero se obtuvieron " 
+						+ (llavesEncontradas.darTamano() - (maxKey - minKey + 1)) + " llaves adicionales.", llavesEncontradas.darTamano() == (maxKey - minKey + 1));
+			}
+		}
+	}
+	
+	/**
+	 * Prueba el metodo valuesInRange()
+	 */
+	@Test
+	public void testValuesInRange() {
+		int nTests = 15; // Numero de intervalos con los que se probara el metodo para cada escenario
+		int minvalue;
+		int maxvalue;
+		int temp;
+		IArregloDinamico<Integer> valoresEncontradas = new ArregloDinamico<>();
+		
+		for (int n = 1; n < numeroEscenarios; n++) {
+			setUpEscenario(n, true);
+			
+			// Probar varios rangos por cada escenario
+			for (int i = 0; i < nTests; i++) {
+				valoresEncontradas = new ArregloDinamico<>();
+				// Eleccion de los rangos
+				minvalue = (int)(Math.random()*n);
+				maxvalue = (int)(Math.random()*n);
+				
+				if (maxvalue < minvalue) {
+					temp = minvalue;
+					minvalue = maxvalue;
+					maxvalue = temp;
+				}
+				
+				// Extraccion de valores en rango en formato ordenable
+				for (Integer value : tabla.valuesInRange(minvalue, maxvalue)) valoresEncontradas.agregar(value);
+				Sort.ordenarQuickSort(valoresEncontradas);
+				
+							
+				// Revisar que todas las valores en ese rango fueron encontradas
+				for (int j = minvalue; j <= maxvalue; j++) {
+					assertTrue("Escenario: " + n + ". Se esperaba encontrar a la valor" + j + " en el rango de busqueda"
+							+ " cuando en cambio se encontro la valor" + valoresEncontradas.darObjeto(j - minvalue)
+							, valoresEncontradas.darObjeto(j - minvalue).equals(j));
+					System.out.println("Se hallo la valorcorrecto en el escenacio " + n + " para minvalue = " + minvalue + ", maxvalue =  " + maxvalue + " y la valor" + j);
+				}
+				
+				// Asegurarse de que no hay valores adicionales encontradas en ese rango
+				assertTrue("Escenario: " + n + ". No se esperaban valores adicionales en el rango dado, pero se obtuvieron " 
+						+ (valoresEncontradas.darTamano() - (maxvalue - minvalue + 1)) + " valores adicionales.", valoresEncontradas.darTamano() == (maxvalue - minvalue + 1));
 			}
 		}
 	}
