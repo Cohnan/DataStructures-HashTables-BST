@@ -16,6 +16,9 @@ import model.data_structures.ITablaSimOrd;
 import model.vo.VOMovingViolation;
 
 public class LoadMovingViolations {
+	
+	private static int largoSemestre = 6; // Variable a cambiar en caso de que, por memoria, no se puedan cargar 6 meses
+	
 	/**
 	 * Carga los datos del semestre indicado indicado
 	 * @param n Numero de semestre del anio (entre 1 y 2)
@@ -24,14 +27,14 @@ public class LoadMovingViolations {
 	 */
 	public static IArregloDinamico<Integer> loadMovingViolations(int n, ITablaSimOrd<Integer, VOMovingViolation>[] tablas)
 	{
-		String[] filePaths = new String[6];
+		String[] filePaths = new String[largoSemestre];
 		IArregloDinamico<Integer> numeroDeCargas = new ArregloDinamico<>();
 		if (n != 1 && n != 2)
 		{
 			throw new IllegalArgumentException("No existe ese semestre en un annio.");
 		}
 		
-		for (int i = 0; i < 6; i++) filePaths[i] = Controller.movingViolationsFilePaths[6*(n-1) + i];
+		for (int i = 0; i < largoSemestre; i++) filePaths[i] = Controller.movingViolationsFilePaths[largoSemestre*(n-1) + i];
 		
 		numeroDeCargas = loadMovingViolations(filePaths, tablas);
 		
@@ -119,7 +122,7 @@ public class LoadMovingViolations {
 		int contadorInf; // Cuenta numero de infracciones en cada archivo
 		try {
 			for (String filePath : movingViolationsFilePaths) {
-				reader = new JReader(new File("data/"+filePath));
+				reader = new JReader(new File(filePath));
 				contadorInf = 0;
 				
 				// Lee linea a linea el archivo para crear las infracciones y cargarlas a la lista
