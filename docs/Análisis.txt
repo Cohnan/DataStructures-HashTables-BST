@@ -1,11 +1,19 @@
 Taller 7: Árboles Rojo - Negro
 
 a) Total de nodos (infracciones) en el árbol: El número total de nodos en el árbol es de 599207. Es decir, se cuenta con un total de 599207 infracciones.
+
 b) Altura (real) del árbol: La altura del árbol es de 26 niveles. La altura se puede entender como el número de arcos desde la raíz hasta el último nivel. 
+
 c) Altura promedio para buscar una infracción existente en el árbol: La altura promedio del árbol es de 17.5312. 
+
 d) Altura teórica del árbol Red-Black más alto que se podría construir con el mismo número de infracciones: En el peor caso, después de insertar 599207 infracciones, la altura teórica del árbol sería de  2lgN. Es decir, la altura teórica más alta del árbol es de 38.38, es decir 38 niveles. 
-e) Altura teórica del árbol Red-Black más bajo que se podría construir con el mismo número de infracciones: La altura teórica más baja de un árbol Red-Black está dada por la expresión lgN. Es decir, la altura teórica del árbol más bajo sería de 19.1926 es decir 19 niveles. 
+
+e) Altura teórica del árbol Red-Black más bajo que se podría construir con el mismo número de infracciones: La altura teórica más baja de un árbol Red-Black está dada por la expresión lgN. Es decir, la altura teórica del árbol más bajo sería de 19.1926 es decir 19 niveles.
+ 
 f) Altura teórica del árbol 2-3 más alto que se podría construir con el mismo número de infracciones: En el peor caso, la altura teórica de un árbol 2-3 es de lgN. Es decir 19.1926 que corresponde a 19 niveles. 
+
 g) Altura teórica del árbol 2-3 más bajo que se podría construir con el mismo número de infracciones: En el mejor caso, la altura teórica de un árbol 2-3 es de lg_3(N). Es decir 12.10924 que corresponde a 12 niveles. 
-h) Comentario de análisis del árbol Red Black: Teniendo en cuenta que la altura del árbol construido es de 26, corresponde a un mayor valor que la altura teórica, tanto en el mejor caso como en el peor caso, de un árbol 2-3. Por otro lado, nótese que la altura obtenida se encuentra entre la altura de un árbol Red Black en el peor caso (38) y del mismo árbol en el mejor caso (19). Así, podemos concluir que el resultado empírico corresponde con el análisis teórico. Por último, es importante notar que teóricamente el árbol 2-3 es más eficiente, pero su implementación es muy complicada. 
+
+h) Comentario de análisis del árbol Red Black: Teniendo en cuenta que la altura del árbol construido es de 26, corresponde a un mayor valor que la altura teórica, tanto en el mejor caso como en el peor caso, de un árbol 2-3. Por otro lado, nótese que la altura obtenida se encuentra entre la altura de un árbol Red Black en el peor caso (38) y del mismo árbol en el mejor caso (19). Así, podemos concluir que el resultado empírico corresponde con el análisis teórico. 
+
 i) Comentario de análisis sobre la altura promedio del árbol: El resultado más importante es que la altura promedio del árbol construido se encuentra cerca a la altura teórica del árbol 2-3. Esto es producto de la simetría y el balance que tiene el árbol Red-Black. Por otro lado, como era de esperarse, la altura promedio del árbol construido es menor a la altura real y teórica del árbol Red-Black . Esto se debe a que, evidentemente, el rango de la búsqueda será siempre entre [0, 26]. Por esto, al sacar el promedio, se tiene una altura promedio menor a la altura teórica. 

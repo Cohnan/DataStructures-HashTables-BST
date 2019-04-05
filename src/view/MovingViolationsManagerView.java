@@ -49,7 +49,7 @@ public class MovingViolationsManagerView
 			System.out.println("Infracci�n - Object ID - inv�lida");
 		}else{
 		System.out.println("Informaci�n sobre la infracci�n con ID: " + infraccion.getObjectId());
-		System.out.println("Location" + infraccion.getLocation());
+		System.out.println("Location: " + infraccion.getLocation());
 		System.out.println("AddressID: "+infraccion.getAddressID());
 		System.out.println("StreetSegID: " + infraccion.getStreetsegID());
 		System.out.println("XCoord: " + infraccion.getXCoord());
@@ -65,7 +65,7 @@ public class MovingViolationsManagerView
 
 	public void printMovingViolationsReq2(Iterable<VOMovingViolation> iterador) {
 		int contador = 0;
-		System.out.println("#"+"\t"+"ObjectID"+"\t"+"Location"+"\t\t"+"Address ID"+"\t"+"StreetSegID"+"\t"+"XCoord"+"\t"+"YCoord"+"\t"+"TicketIssueDate");
+		System.out.println("#"+"\t"+"ObjectID"+"\t"+"Location"+"\t\t\t"+"Address ID"+"\t"+"StreetSegID"+"\t"+"XCoord"+"\t"+"YCoord"+"\t"+"TicketIssueDate");
 		for(VOMovingViolation s: iterador ){
 		contador ++;
 		System.out.println(contador+"."+"\t" + s.getObjectId() +"\t" + s.getLocation()+"\t" +s.getAddressID()+"\t" +s.getStreetsegID()+"\t" +s.getXCoord()+ "\t" +s.getYCoord()+ "\t" +s.getTicketIssueDate());
